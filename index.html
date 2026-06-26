@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>审讯室 · INTERROGATION ROOM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- =================== 案件大厅 =================== -->
+  <section id="view-lobby" class="view view-active">
+    <div class="lobby-bg"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <header class="lobby-header">
+      <div class="classified-stamp">CLASSIFIED · 机密</div>
+      <h1 class="lobby-title">
+        <span class="title-zh">审 讯 室</span>
+        <span class="title-en">INTERROGATION · ROOM</span>
+      </h1>
+      <p class="lobby-sub">「真相从不在沉默中消亡，只在逼问下现身」</p>
+      <div class="lobby-meta">
+        <span>立案数：3</span>
+        <span class="dot">·</span>
+        <span>心理博弈</span>
+        <span class="dot">·</span>
+        <span>分支结局</span>
+      </div>
+    </header>
+
+    <main class="lobby-main">
+      <div class="case-grid" id="case-grid"></div>
+    </main>
+
+    <footer class="lobby-footer">
+      <span>证据已归档 · 1947-2026</span>
+      <span class="blink">●&nbsp;REC</span>
+    </footer>
+  </section>
+
+  <!-- =================== 审讯室 =================== -->
+  <section id="view-room" class="view">
+    <div class="room-bg"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+    <div class="flash-overlay" id="flash-overlay"></div>
+
+    <header class="room-header">
+      <div class="room-header-left">
+        <div class="case-badge" id="room-case-badge">CASE #000</div>
+        <div class="stage-badge" id="room-stage-badge">阶段 1 / 3</div>
+      </div>
+      <div class="room-header-right">
+        <div class="round-counter" id="round-counter">轮次 0 / 8</div>
+        <div class="attempts-counter" id="attempts-counter">机会: ●●●</div>
+        <button class="btn-ghost" id="btn-exit">← 退出审讯</button>
+      </div>
+    </header>
+
+    <main class="room-main">
+      <!-- 嫌疑人侧栏 -->
+      <aside class="prisoner-panel" id="prisoner-panel">
+        <div class="portrait-frame">
+          <div class="portrait-light"></div>
+          <div class="portrait-svg" id="portrait-svg"></div>
+        </div>
+        <div class="prisoner-info">
+          <h2 class="prisoner-name" id="prisoner-name">--</h2>
+          <div class="prisoner-tags" id="prisoner-tags"></div>
+          <p class="prisoner-bio" id="prisoner-bio">--</p>
+        </div>
+        <div class="mood-meter">
+          <div class="mood-meter-label">
+            <span>抗 拒 度</span>
+            <span id="mood-value">50</span>
+          </div>
+          <div class="mood-bar"><div class="mood-bar-fill" id="mood-bar-fill"></div></div>
+        </div>
+        <div class="unlocked-tags" id="unlocked-tags"></div>
+      </aside>
+
+      <!-- 对话与输入 -->
+      <section class="dialogue-section">
+        <div class="goal-banner" id="goal-banner">
+          <span class="goal-icon">◎</span>
+          <span class="goal-text">本阶段目标：<b id="goal-text">--</b></span>
+        </div>
+        <div class="hint-banner" id="hint-banner">提示：<span id="hint-text">--</span></div>
+
+        <div class="dialogue-stream" id="dialogue-stream"></div>
+
+        <div class="input-area" id="input-area">
+          <div class="tone-selector" id="tone-selector">
+            <button class="tone-btn" data-tone="intimidate">
+              <span class="tone-icon">⚡</span><span class="tone-name">威压</span>
+            </button>
+            <button class="tone-btn" data-tone="friendly">
+              <span class="tone-icon">☕</span><span class="tone-name">温和</span>
+            </button>
+            <button class="tone-btn" data-tone="deceive">
+              <span class="tone-icon">🎭</span><span class="tone-name">欺骗</span>
+            </button>
+            <button class="tone-btn" data-tone="logical">
+              <span class="tone-icon">🔍</span><span class="tone-name">逻辑</span>
+            </button>
+          </div>
+          <div class="input-row">
+            <textarea id="player-input" rows="2" placeholder="输入你的问话……（或点击 🎙 语音输入）"></textarea>
+            <div class="input-actions">
+              <button class="btn-mic" id="btn-mic" title="语音输入">🎙</button>
+              <button class="btn-send" id="btn-send">发送</button>
+            </div>
+          </div>
+          <div class="judge-row">
+            <button class="btn-judge btn-judge-yes" id="btn-judge-yes">✓ 目标已达成，继续</button>
+            <button class="btn-judge btn-judge-no" id="btn-judge-no">↻ 继续审讯</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- =================== 结算页 =================== -->
+  <section id="view-ending" class="view">
+    <div class="ending-bg"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <div class="ending-card" id="ending-card">
+      <div class="ending-stamp" id="ending-stamp">CASE CLOSED</div>
+      <h1 class="ending-title" id="ending-title">案件结束</h1>
+      <p class="ending-subtitle" id="ending-subtitle">--</p>
+      <div class="ending-story" id="ending-story">--</div>
+      <div class="ending-stats" id="ending-stats"></div>
+      <div class="ending-actions">
+        <button class="btn-primary" id="btn-ending-replay">↻ 重玩此案</button>
+        <button class="btn-ghost" id="btn-ending-lobby">← 返回大厅</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== 档案页 =================== -->
+  <section id="view-dossier" class="view">
+    <div class="dossier-bg"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <div class="dossier-container" id="dossier-container">
+      <button class="btn-ghost btn-back" id="btn-dossier-back">← 返回</button>
+      <h1 class="dossier-title" id="dossier-title">嫌疑人档案</h1>
+      <div class="dossier-content" id="dossier-content"></div>
+    </div>
+  </section>
+
+  <!-- 模态：浮层提示 -->
+  <div class="modal-mask" id="modal-mask">
+    <div class="modal" id="modal">
+      <div class="modal-title" id="modal-title">提示</div>
+      <div class="modal-body" id="modal-body">--</div>
+      <div class="modal-actions" id="modal-actions">
+        <button class="btn-primary" id="modal-ok">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 脚本 -->
+  <script src="./data/cases.js"></script>
+  <script src="./engine.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
