@@ -1,0 +1,10 @@
+{
+  "name": "interrogation-room",
+  "version": "1.0.0",
+  "description": "审讯室 - 互动文字冒险游戏",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "echo '静态文件无需构建，直接部署'",
+    "deploy": "echo '请使用 Vercel/Netlify/Cloudflare 一键部署'"
+  }
+}
