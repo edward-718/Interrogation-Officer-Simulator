@@ -10,6 +10,17 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <!-- =================== 开场引导 =================== -->
+  <div class="intro-screen" id="intro-screen">
+    <div class="intro-scanline"></div>
+    <div class="intro-content">
+      <div class="intro-stamp">CLASSIFIED</div>
+      <div class="intro-title">INTERROGATION ROOM</div>
+      <div class="intro-sub">机密档案开启中……</div>
+      <div class="intro-bar"><div class="intro-bar-fill"></div></div>
+    </div>
+  </div>
+
   <!-- =================== 案件大厅 =================== -->
   <section id="view-lobby" class="view view-active">
     <div class="lobby-bg"></div>
@@ -18,6 +29,8 @@
 
     <header class="lobby-header">
       <div class="classified-stamp">CLASSIFIED · 机密</div>
+      <div class="lobby-rank-badge">Lv.1 见习审讯官</div>
+      <button class="btn-demo" id="btn-demo" title="自动演示">▶ 自动演示</button>
       <h1 class="lobby-title">
         <span class="title-zh">审 讯 室</span>
         <span class="title-en">INTERROGATION · ROOM</span>
@@ -73,12 +86,34 @@
           <div class="prisoner-tags" id="prisoner-tags"></div>
           <p class="prisoner-bio" id="prisoner-bio">--</p>
         </div>
-        <div class="mood-meter">
-          <div class="mood-meter-label">
-            <span>抗 拒 度</span>
-            <span id="mood-value">50</span>
+        <div class="psych-gauge" id="psych-gauge">
+          <div class="gauge-row gauge-tension">
+            <span class="gauge-label">紧张度</span>
+            <span class="gauge-value" id="gauge-tension-value">50</span>
+            <div class="gauge-bar"><div class="gauge-fill" id="gauge-tension-fill" style="width:50%"></div></div>
           </div>
-          <div class="mood-bar"><div class="mood-bar-fill" id="mood-bar-fill"></div></div>
+          <div class="gauge-row gauge-defense">
+            <span class="gauge-label">防御值</span>
+            <span class="gauge-value" id="gauge-defense-value">50</span>
+            <div class="gauge-bar"><div class="gauge-fill" id="gauge-defense-fill" style="width:50%"></div></div>
+          </div>
+          <div class="gauge-row gauge-trust">
+            <span class="gauge-label">信任度</span>
+            <span class="gauge-value" id="gauge-trust-value">50</span>
+            <div class="gauge-bar"><div class="gauge-fill" id="gauge-trust-fill" style="width:50%"></div></div>
+          </div>
+        </div>
+        <!-- 测谎仪 -->
+        <div class="lie-meter" id="lie-meter">
+          <div class="lie-label">测谎反应</div>
+          <div class="lie-dial">
+            <div class="lie-arc"></div>
+            <div class="lie-pointer" id="lie-pointer"></div>
+            <div class="lie-center"></div>
+          </div>
+          <div class="lie-scale">
+            <span>谎</span><span>疑</span><span>真</span>
+          </div>
         </div>
         <div class="unlocked-tags" id="unlocked-tags"></div>
       </aside>
